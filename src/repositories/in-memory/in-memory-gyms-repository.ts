@@ -1,7 +1,7 @@
 import type { Gym } from "@prisma/client";
+import { Prisma } from "@/generated/prisma/browser.js";
 import type { GymsRepository } from "../gyms-repository.js";
 import { randomUUID } from "node:crypto";
-import { Prisma } from "@/generated/prisma/browser.js";
 
 
 export class InMemoryGymsRepository implements GymsRepository {
@@ -15,6 +15,13 @@ export class InMemoryGymsRepository implements GymsRepository {
         }
 
         return gym
+    }
+
+    async searchMany(query: string, page: number): Promise<Gym[]> {
+            const startIndex = (page - 1) * 20
+            const endIndex = startIndex + 20
+            return this.items.filter((item) => item.title.includes(query))
+            .slice(startIndex, endIndex)
     }
 
     async create(data: Prisma.GymCreateInput) {
