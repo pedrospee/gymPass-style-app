@@ -2,7 +2,7 @@ import { expect, describe, it, beforeEach, afterEach, vi}  from "vitest";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins-repository.js";
 import { CheckInUseCase } from "./check-in.js";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository.js";
-import { Decimal } from "@prisma/client/runtime/client";
+import { Prisma } from "@/generated/prisma/client.js";
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error.js";
 import { MaxDistanceError } from "./errors/max-distance-error.js";
 
@@ -93,8 +93,8 @@ describe("Check-in Use Case", () => {
             title: "JavaScript Gym",
             description: "",
             phone: "",
-            latitude: new Decimal(-23.4996825),
-            longitude: new Decimal(-46.6344009),
+            latitude: new Prisma.Decimal(-23.4996825),
+            longitude: new Prisma.Decimal(-46.6344009),
         })
 
         await expect(() =>

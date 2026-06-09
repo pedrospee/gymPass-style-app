@@ -1,5 +1,4 @@
-import type { Prisma } from "@/generated/prisma/browser.js";
-import type { Gym } from "@prisma/client";
+import type { Prisma, Gym } from "@/generated/prisma/client.js";
 
 export interface FindManyNearbyGymsParams {
     latitude: number;
