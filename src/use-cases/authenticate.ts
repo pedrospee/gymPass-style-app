@@ -1,7 +1,7 @@
 import type { UsersRepository } from "@/repositories/users-repository.js";
 import type { User } from "@/generated/prisma/client.js";
 import { compare } from "bcryptjs";
-import { InvalidCredentialsError } from "./errors/invalid-credentials-error.js";
+import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error.js";
 
 
 

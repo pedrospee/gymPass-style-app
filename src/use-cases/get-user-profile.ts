@@ -1,6 +1,6 @@
 import type { UsersRepository } from "@/repositories/users-repository.js";
 import type { User } from "@/generated/prisma/client.js";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error.js";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js";
 
 
 

@@ -1,5 +1,5 @@
 import { Prisma, type Gym } from "@/generated/prisma/client.js";
-import type { FindManyNearbyGymsParams, GymsRepository } from "../gyms-repository.js";
+import type { FindManyNearbyGymsParams, GymsRepository } from "@/repositories/gyms-repository.js";
 import { randomUUID } from "node:crypto";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-betwenn-coordinates.js";
 
