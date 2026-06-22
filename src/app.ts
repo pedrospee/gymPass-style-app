@@ -1,9 +1,14 @@
 import fastify from "fastify";
+import fastifyJWT from "@fastify/jwt";
 import { appRoutes } from "./http/routes.js";
 import { ZodError } from "zod";
-import { env } from "node:process";
+import { env } from "./env/index.js";
 
 export const app = fastify()
+
+app.register(fastifyJWT, {
+    secret: env.JWT_SECRET,
+})
 
 app.register(appRoutes)
 
@@ -15,7 +20,7 @@ app.setErrorHandler((error, _, reply) => {
         })
     }
 
-    if (env.NODE_ENV === "development") {
+    if (env.NODE_ENV === "dev") {
         console.error(error)
     } else {
         // TODO: Here we should log the error in an external tool like DataDog/NewRelic/Sentry
