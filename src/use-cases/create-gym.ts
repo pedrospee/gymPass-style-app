@@ -1,5 +1,5 @@
-import type { Gym } from "@/generated/prisma/browser.js";
-import type { GymsRepository } from "@/repositories/gyms-repository.js";
+import type { Gym } from '@/generated/prisma/browser.js';
+import type { GymsRepository } from '@/repositories/gyms-repository.js';
 
 
 interface CreateGymUseCaseRequest {
@@ -29,7 +29,7 @@ export class CreateGymUseCase {
             phone,
             latitude,
             longitude,
-        })
-        return { gym }
+        });
+        return { gym };
     }
 }

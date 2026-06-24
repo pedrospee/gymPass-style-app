@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 
 export class PrismaCheckInsRepository implements CheckInsRepository {
     async findById(id: string) {
-        const checkIn = await prisma.checkIn.findUnique({ where: { id } })
-        return checkIn
+        const checkIn = await prisma.checkIn.findUnique({ where: { id } });
+        return checkIn;
     }
 
     async findByUserIdOnDate(userId: string, date: Date) {
@@ -33,8 +33,8 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
             },
             take: 20,
             skip: (page - 1) * 20,
-        })
-        return checkIns
+        });
+        return checkIns;
     }
 
     async countByUserId(userId: string) {
@@ -42,23 +42,23 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
             where: {
                 userId,
             }
-        })
-        return count
+        });
+        return count;
     }
 
     async create(data: Prisma.CheckInUncheckedCreateInput) {
         const checkIn = await prisma.checkIn.create({
             data,
-        })
-        return checkIn
+        });
+        return checkIn;
     }
 
     async save(data: CheckIn) {
         const checkIn = await prisma.checkIn.update({
             where: { id: data.id },
             data: data,
-        })
-        return checkIn
+        });
+        return checkIn;
     }
 
 }

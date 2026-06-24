@@ -1,32 +1,34 @@
-import fastify from "fastify";
-import fastifyJWT from "@fastify/jwt";
-import { appRoutes } from "./http/routes.js";
-import { ZodError } from "zod";
-import { env } from "./env/index.js";
+import fastify from 'fastify';
+import fastifyJWT from '@fastify/jwt';
+import { usersRoutes } from '@/http/controllers/users/routes.js';
+import { ZodError } from 'zod';
+import { env } from '@/env/index.js';
+import { gymsRoutes } from '@/http/controllers/gyms/routes.js';
 
-export const app = fastify()
+export const app = fastify();
 
 app.register(fastifyJWT, {
     secret: env.JWT_SECRET,
-})
+});
 
-app.register(appRoutes)
+app.register(usersRoutes);
+app.register(gymsRoutes);
 
 app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {
         return reply.status(400).send({
-            message: "Validation error.",
+            message: 'Validation error.',
             issues: error.format(),
-        })
+        });
     }
 
-    if (env.NODE_ENV === "dev") {
-        console.error(error)
+    if (env.NODE_ENV === 'dev') {
+        console.error(error);
     } else {
         // TODO: Here we should log the error in an external tool like DataDog/NewRelic/Sentry
     }
 
     return reply.status(500).send({
-        message: "Internal server error."
-    })
-})
+        message: 'Internal server error.'
+    });
+});

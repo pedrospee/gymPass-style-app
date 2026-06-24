@@ -1,6 +1,6 @@
-import type { UsersRepository } from "@/repositories/users-repository.js";
-import type { User } from "@/generated/prisma/client.js";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js";
+import type { UsersRepository } from '@/repositories/users-repository.js';
+import type { User } from '@/generated/prisma/client.js';
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error.js';
 
 
 
@@ -10,21 +10,21 @@ interface GetUserProfileUseCaseRequest {
 interface GetUserProfileUseCaseResponse {
     user: User;
 }
-    
+
 export class GetUserProfileUseCase {
     constructor(
         private usersRepository: UsersRepository,
     ) {}
 
     async execute({ userId }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
-        const user = await this.usersRepository.findById(userId)
+        const user = await this.usersRepository.findById(userId);
 
         if (!user) {
-            throw new ResourceNotFoundError()
+            throw new ResourceNotFoundError();
         }
 
         return {
             user,
-        }
+        };
     }
 }

@@ -1,5 +1,5 @@
-import type { Gym } from "@/generated/prisma/browser.js";
-import type { GymsRepository } from "@/repositories/gyms-repository.js";
+import type { Gym } from '@/generated/prisma/browser.js';
+import type { GymsRepository } from '@/repositories/gyms-repository.js';
 
 
 interface FetchNearbyGymsUseCaseRequest {
@@ -20,10 +20,10 @@ export class FetchNearbyGymsUseCase {
         const gyms = await this.gymsRepository.findManyNearby({
             latitude: userLatitude,
             longitude: userLongitude
-        })
+        });
 
-        return { 
+        return {
             gyms,
-        }
+        };
     }
 }

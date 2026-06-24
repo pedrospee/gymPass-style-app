@@ -1,5 +1,5 @@
-import type { Gym } from "@/generated/prisma/browser.js";
-import type { GymsRepository } from "@/repositories/gyms-repository.js";
+import type { Gym } from '@/generated/prisma/browser.js';
+import type { GymsRepository } from '@/repositories/gyms-repository.js';
 
 
 interface SearchGymsUseCaseRequest {
@@ -17,10 +17,10 @@ export class SearchGymsUseCase {
         query,
         page,
     }: SearchGymsUseCaseRequest): Promise<SearchGymsUseCaseResponse> {
-        const gyms = await this.gymsRepository.searchMany(query, page)
+        const gyms = await this.gymsRepository.searchMany(query, page);
 
-        return { 
+        return {
             gyms,
-        }
+        };
     }
 }
