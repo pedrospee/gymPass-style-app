@@ -2,13 +2,13 @@ import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest';
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository.js';
 import { FetchNearbyGymsUseCase } from '@/use-cases/fetch-nearby-gyms.js';
 
-let GymsRepository: InMemoryGymsRepository;
+let gymsRepository: InMemoryGymsRepository;
 let sut: FetchNearbyGymsUseCase;
 
 describe('Fetch Nearby Gyms Use Case', () => {
     beforeEach(async () => {
-        GymsRepository = new InMemoryGymsRepository();
-        sut = new FetchNearbyGymsUseCase(GymsRepository);
+        gymsRepository = new InMemoryGymsRepository();
+        sut = new FetchNearbyGymsUseCase(gymsRepository);
 
         vi.useFakeTimers();
     });
@@ -18,7 +18,7 @@ describe('Fetch Nearby Gyms Use Case', () => {
     });
 
     it('should be able to fetch nearby gyms', async () => {
-        await GymsRepository.create({
+        await gymsRepository.create({
             title: 'Near Gym',
             description: null,
             phone: '123456789',
@@ -26,7 +26,7 @@ describe('Fetch Nearby Gyms Use Case', () => {
             longitude: -46.6222736,
         });
 
-        await GymsRepository.create({
+        await gymsRepository.create({
             title: 'Near Gym',
             description: null,
             phone: '123456789',
