@@ -1,5 +1,6 @@
 import fastify from 'fastify';
 import fastifyJWT from '@fastify/jwt';
+import fastifyCookie from '@fastify/cookie';
 import { usersRoutes } from '@/http/controllers/users/routes.js';
 import { ZodError } from 'zod';
 import { env } from '@/env/index.js';
@@ -8,8 +9,17 @@ import { checkInsRoutes } from '@/http/controllers/check-ins/routes.js';
 
 export const app = fastify();
 
+app.register(fastifyCookie);
+
 app.register(fastifyJWT, {
     secret: env.JWT_SECRET,
+    cookie: {
+        cookieName: 'refreshToken',
+        signed: false,
+    },
+    sign: {
+        expiresIn: '10m',
+    },
 });
 
 app.register(usersRoutes);

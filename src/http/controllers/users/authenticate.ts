@@ -2,6 +2,7 @@ import type { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error.js';
 import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case.js';
+import { env } from '@/env/index.js';
 
 
 export async function authenticate(request: FastifyRequest, reply: FastifyReply) {
@@ -28,7 +29,22 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
             }
         });
 
-    return reply.status(200).send({ token });
+        const refreshToken = await reply
+        .jwtSign({}, {
+            sign: {
+                sub: user.id,
+                expiresIn: '7d',
+            }
+        });
+
+    return reply
+    .setCookie('refreshToken', refreshToken, {
+        path: '/',
+        secure: env.NODE_ENV === 'prod',
+        sameSite: true,
+        httpOnly: true,
+    })
+    .status(200).send({ token });
 
     } catch (err) {
         if (err instanceof InvalidCredentialsError) {
