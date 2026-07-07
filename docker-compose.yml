@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  gympass-style-app:
+  postgres:
     image: bitnami/postgresql
     ports:
       - "5432:5432"
